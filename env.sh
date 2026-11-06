@@ -6,4 +6,4 @@ export PREFIX=$W/prefix
 export PKG_CONFIG_LIBDIR=$PREFIX/lib/pkgconfig
 unset PKG_CONFIG_PATH
 export HOST=x86_64-w64-mingw32
-export CFLAGS="-O2 -Wno-error=int-conversion -Wno-error=incompatible-function-pointer-types -Wno-error=implicit-function-declaration -Wno-error=implicit-int"
+export CFLAGS="-O2 -I$PREFIX/include -Wno-error=int-conversion -Wno-error=incompatible-function-pointer-types -Wno-error=implicit-function-declaration -Wno-error=implicit-int"
