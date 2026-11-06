@@ -3,3 +3,4 @@ src/
 prefix/
 *.log
 out/
+*.7z
