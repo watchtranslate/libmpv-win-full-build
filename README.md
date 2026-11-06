@@ -23,6 +23,7 @@ WatchTranslate 的 Windows `libmpv-2.dll`：所有 FFmpeg 解码器、解复用�
 
 ```sh
 # 一次性：llvm-mingw 解到本目录；meson/ninja/nasm 在 PATH 上（env.sh 里写了本机路径，换机器改 env.sh）
+./fetch-sources.sh # 全部源码包，按 SHA-256 核对(各 build 脚本也会先调用它)
 ./build-deps.sh    # dav1d、zlib、ANGLE 头文件
 ./build-ffmpeg.sh
 ./build-ass.sh
@@ -33,3 +34,16 @@ WatchTranslate 的 Windows `libmpv-2.dll`：所有 FFmpeg 解码器、解复用�
 
 release 资产是与 media-kit 同样布局的 7z（`libmpv-2.dll`、`libmpv.dll.a`、`include/mpv/*.h`），App 的
 `third_party/media_kit_libs_windows_video` 按 SHA-256 下载。
+
+## 工具链与可复现性
+
+- llvm-mingw `20261104`：`llvm-mingw-20261104-ucrt-macos-universal.tar.xz`（github.com/mstorsjo/llvm-mingw），解到本目录。
+- meson 1.2.3、ninja、nasm 2.16.03；`env.sh` 里写的是作者本机路径，换机器时改 PATH。
+- ANGLE 头文件取自 google/angle `chromium/5993` 分支（只用头文件，不进 dll 的代码）。
+- 打包：`cd out && 7zz a -t7z -mx=9 ../mpv-dev-x86_64-<版本>.7z include libmpv-2.dll libmpv.dll.a`。
+
+## 许可
+
+本仓库的脚本按 MIT 发布。产物 `libmpv-2.dll` 含 mpv（LGPL-2.1+，`-Dgpl=false`）与 FFmpeg（LGPL-3.0+，`--disable-gpl --disable-nonfree --enable-version3`），
+以及 dav1d（BSD-2）、zlib（zlib）、freetype（FTL）、fribidi（LGPL-2.1+）、harfbuzz（MIT）、libass（ISC）；对应源码版本和补丁就是本仓库的 `fetch-sources.sh` 与 `patches/`。
+与旧版相比没有编入：libxml2（DASH 解复用器）、NVDEC/CUDA/QSV、libarchive、uchardet、iconv、lcms2、zimg、spirv-cross/d3d11 vo、avdevice；TLS 用系统 schannel。

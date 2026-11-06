@@ -2,6 +2,7 @@
 # mpv 652a1dd907(与 media-kit 2023-09-24 版 libmpv-2.dll 同一提交)：只编 libmpv-2.dll，LGPL，egl-angle + d3d11va 硬解，依赖静态链接。
 set -euo pipefail
 . "$(dirname "$0")/env.sh"
+"$W/fetch-sources.sh"
 cd $W/src/mpv-652a1dd90711839acdccc08004056d25514ef2d8
 rm -rf build
 # 源码包没有 .git：别让 vcs_tag 找到外层仓库，版本号取 VERSION(与 media-kit 2023-09-24 版同一提交)。
