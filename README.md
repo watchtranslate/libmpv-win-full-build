@@ -9,7 +9,7 @@ WatchTranslate 的 Windows `libmpv-2.dll`：所有 FFmpeg 解码器、解复用�
 
 | 组件 | 版本 | 说明 |
 |---|---|---|
-| mpv | `652a1dd907`（0.36.0-403，与 media-kit 2023-09-24 版同一提交） | 只编 libmpv；LGPL（`-Dgpl=false`）；egl-angle、d3d11va 硬解、gl-win32；补丁 `patches/mpv-wasapi-include-mmreg.patch`（新版 mingw-w64 头文件需要） |
+| mpv | `652a1dd907`（0.36.0-403，与 media-kit 2023-09-24 版同一提交） | 只编 libmpv；LGPL（`-Dgpl=false`）；egl-angle、d3d11va 硬解、gl-win32；补丁 `patches/mpv-wasapi-include-mmreg.patch`（新版 mingw-w64 头文件需要）、`patches/mpv-ao-pcm-utf8-path.patch`（ao_pcm 用 CRT 窄字符 `fopen`，PCM 输出路径含中文等非 ASCII 字符时打不开；改走 `mp_fopen`。App 取音靠它把 PCM 写进用户目录） |
 | FFmpeg | n6.0 | LGPL v3，全部解码器/解复用器/解析器，dav1d、zlib、schannel、d3d11va/dxva2；补丁 `patches/ffmpeg-fix-fmp4-hls-seek-reset.patch`（上游 380a518c 回移，与 Android/iOS/macOS 相同） |
 | dav1d | 1.2.1 | 静态 |
 | zlib | 1.3.1 | 静态 |

@@ -1,0 +1,14 @@
+diff --git a/audio/out/ao_pcm.c b/audio/out/ao_pcm.c
+index 4097aa3..9209fd2 100644
+--- a/audio/out/ao_pcm.c
++++ b/audio/out/ao_pcm.c
+@@ -40,6 +40,9 @@
+ #include <io.h>
+ #endif
+ 
++// fopen in the CRT takes the ANSI code page: route it through mp_fopen (UTF-8 → wide) so PCM output paths with non-ASCII characters work.
++#include "osdep/io.h"
++
+ struct priv {
+     char *outputfilename;
+     bool waveheader;

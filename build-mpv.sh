@@ -8,6 +8,7 @@ rm -rf build
 export GIT_CEILING_DIRECTORIES=$W/src
 echo "0.36.0-403-g652a1dd907" > VERSION
 grep -q "<mmreg.h>" audio/out/ao_wasapi_utils.c || patch -p1 < $W/patches/mpv-wasapi-include-mmreg.patch
+grep -q '"osdep/io.h"' audio/out/ao_pcm.c || patch -p1 < $W/patches/mpv-ao-pcm-utf8-path.patch
 meson setup build --cross-file $W/cross.ini --prefix=$PREFIX --buildtype=release -Db_ndebug=true \
   --default-library=shared -Dprefer_static=true -Dc_link_args="-static" -Dcpp_link_args="-static" \
   -Dlibmpv=true -Dcplayer=false -Dgpl=false -Dtests=false \
