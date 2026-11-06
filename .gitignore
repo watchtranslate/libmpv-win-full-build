@@ -1,0 +1,5 @@
+llvm-mingw-*/
+src/
+prefix/
+*.log
+out/
